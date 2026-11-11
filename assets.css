@@ -1,0 +1,438 @@
+/* Game PNG assets — load after styles.css + responsive.css */
+
+/* Standard playing-card face slot (5:7) — deck faces, Tichu specials, anywhere .card-img is used */
+:root {
+  --card-face-h: 94px;
+  --card-face-w: calc(var(--card-face-h) * 5 / 7);
+  --card-face-h-hand: min(88px, 13vw);
+  --card-face-w-hand: calc(var(--card-face-h-hand) * 5 / 7);
+  --card-face-h-trick: 78px;
+  --card-face-w-trick: calc(var(--card-face-h-trick) * 5 / 7);
+  --card-face-h-discard: 148px;
+  --card-face-w-discard: calc(var(--card-face-h-discard) * 5 / 7);
+  --card-face-h-dummy: 52px;
+  --card-face-w-dummy: calc(var(--card-face-h-dummy) * 5 / 7);
+  --tichu-point-card-h: 40px;
+  --tichu-point-card-w: calc(var(--tichu-point-card-h) * 5 / 7);
+}
+
+img.back-card,
+.back-card-btn .back-card {
+  width: var(--card-face-w);
+  height: var(--card-face-h);
+  max-width: none;
+  border: 0;
+  border-radius: 5px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  box-shadow: 1px 2px 4px #0005;
+  flex: none;
+  background: transparent;
+}
+
+.card-stack {
+  display: flex;
+  align-items: flex-end;
+}
+
+.card-stack img.back-card {
+  margin-right: -40px;
+}
+
+.card-stack img.back-card:last-child {
+  margin-right: 0;
+}
+
+.opponent.top .card-stack img.back-card {
+  margin-right: calc(var(--card-face-w) * -0.58);
+}
+
+/* Side opponents — vertical fan; block layout so overlap collapses height (flex was clipping) */
+.opponent.left .card-stack,
+.opponent.right .card-stack {
+  display: block;
+  flex: none;
+  align-self: center;
+  width: calc(var(--card-face-w) * 0.68);
+  overflow: visible;
+  max-height: none;
+  --side-stack-h: calc(var(--card-face-h) * 0.68);
+  --side-stack-overlap: 0.76;
+}
+
+.opponent.left .card-stack[data-count="7"],
+.opponent.right .card-stack[data-count="7"] { --side-stack-overlap: 0.78; }
+.opponent.left .card-stack[data-count="8"],
+.opponent.right .card-stack[data-count="8"] { --side-stack-overlap: 0.81; }
+.opponent.left .card-stack[data-count="9"],
+.opponent.right .card-stack[data-count="9"] { --side-stack-overlap: 0.84; }
+.opponent.left .card-stack[data-count="10"],
+.opponent.right .card-stack[data-count="10"] { --side-stack-overlap: 0.86; }
+.opponent.left .card-stack[data-count="11"],
+.opponent.right .card-stack[data-count="11"] { --side-stack-overlap: 0.88; }
+.opponent.left .card-stack[data-count="12"],
+.opponent.right .card-stack[data-count="12"] { --side-stack-overlap: 0.89; }
+.opponent.left .card-stack[data-count="13"],
+.opponent.right .card-stack[data-count="13"] { --side-stack-overlap: 0.90; }
+.opponent.left .card-stack[data-count="14"],
+.opponent.right .card-stack[data-count="14"] { --side-stack-overlap: 0.91; }
+
+.opponent.left .card-stack img.back-card,
+.opponent.right .card-stack img.back-card {
+  display: block;
+  width: calc(var(--card-face-w) * 0.68);
+  height: var(--side-stack-h);
+  margin-right: 0;
+  margin-top: calc(var(--side-stack-h) * var(--side-stack-overlap) * -1);
+}
+
+.opponent.left .card-stack img.back-card:first-child,
+.opponent.right .card-stack img.back-card:first-child {
+  margin-top: 0;
+}
+
+.opponent.left .card-stack img.back-card:not(:first-child),
+.opponent.right .card-stack img.back-card:not(:first-child) {
+  position: relative;
+}
+
+.opponent.left .card-stack img.back-card:nth-child(1) { z-index: 1; }
+.opponent.left .card-stack img.back-card:nth-child(2) { z-index: 2; }
+.opponent.left .card-stack img.back-card:nth-child(3) { z-index: 3; }
+.opponent.left .card-stack img.back-card:nth-child(4) { z-index: 4; }
+.opponent.left .card-stack img.back-card:nth-child(5) { z-index: 5; }
+.opponent.left .card-stack img.back-card:nth-child(6) { z-index: 6; }
+.opponent.left .card-stack img.back-card:nth-child(7) { z-index: 7; }
+.opponent.left .card-stack img.back-card:nth-child(8) { z-index: 8; }
+.opponent.left .card-stack img.back-card:nth-child(9) { z-index: 9; }
+.opponent.left .card-stack img.back-card:nth-child(10) { z-index: 10; }
+.opponent.left .card-stack img.back-card:nth-child(11) { z-index: 11; }
+.opponent.left .card-stack img.back-card:nth-child(12) { z-index: 12; }
+.opponent.left .card-stack img.back-card:nth-child(13) { z-index: 13; }
+.opponent.left .card-stack img.back-card:nth-child(14) { z-index: 14; }
+.opponent.right .card-stack img.back-card:nth-child(1) { z-index: 1; }
+.opponent.right .card-stack img.back-card:nth-child(2) { z-index: 2; }
+.opponent.right .card-stack img.back-card:nth-child(3) { z-index: 3; }
+.opponent.right .card-stack img.back-card:nth-child(4) { z-index: 4; }
+.opponent.right .card-stack img.back-card:nth-child(5) { z-index: 5; }
+.opponent.right .card-stack img.back-card:nth-child(6) { z-index: 6; }
+.opponent.right .card-stack img.back-card:nth-child(7) { z-index: 7; }
+.opponent.right .card-stack img.back-card:nth-child(8) { z-index: 8; }
+.opponent.right .card-stack img.back-card:nth-child(9) { z-index: 9; }
+.opponent.right .card-stack img.back-card:nth-child(10) { z-index: 10; }
+.opponent.right .card-stack img.back-card:nth-child(11) { z-index: 11; }
+.opponent.right .card-stack img.back-card:nth-child(12) { z-index: 12; }
+.opponent.right .card-stack img.back-card:nth-child(13) { z-index: 13; }
+.opponent.right .card-stack img.back-card:nth-child(14) { z-index: 14; }
+
+.opponent.top .card-stack[data-count="10"] img.back-card,
+.opponent.top .card-stack[data-count="11"] img.back-card,
+.opponent.top .card-stack[data-count="12"] img.back-card,
+.opponent.top .card-stack[data-count="13"] img.back-card,
+.opponent.top .card-stack[data-count="14"] img.back-card {
+  margin-right: calc(var(--card-face-w) * -0.64);
+  margin-top: 0;
+}
+
+.back-card-btn {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px auto;
+}
+
+button.game-card.card-img {
+  width: var(--card-face-w) !important;
+  height: var(--card-face-h) !important;
+  min-width: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden !important;
+  font-size: 0 !important;
+  grid-template: none !important;
+  flex: none;
+  cursor: pointer;
+}
+
+button.game-card.card-img > img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  border-radius: 5px;
+  box-shadow: 1px 2px 4px #0005;
+}
+
+.hand button.game-card.card-img {
+  width: var(--card-face-w-hand) !important;
+  height: var(--card-face-h-hand) !important;
+  flex: none;
+}
+
+.trick-card button.game-card.card-img {
+  width: var(--card-face-w-trick) !important;
+  height: var(--card-face-h-trick) !important;
+}
+
+.discard button.game-card.card-img {
+  width: var(--card-face-w-discard) !important;
+  height: var(--card-face-h-discard) !important;
+}
+
+.opponent .hand.dummy button.game-card.card-img {
+  width: var(--card-face-w-dummy) !important;
+  height: var(--card-face-h-dummy) !important;
+}
+
+.exchange-slot button.game-card.card-img {
+  width: var(--card-face-w-hand) !important;
+  height: var(--card-face-h-hand) !important;
+}
+
+/* Memory */
+.memory-card {
+  padding: 8px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.memory-card img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.memory-card.down {
+  background: url(assets/memory/memory-game-back-side.png) center/contain no-repeat;
+  color: transparent;
+}
+
+.memory-card.down img {
+  display: none;
+}
+
+/* Solitaire — same 5:7 ratio as deck faces */
+.sol-card.card-img {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sol-card.back {
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sol-card.back img,
+.sol-card.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* Backgammon — align interactive grid to backgammon-board.png */
+.bg-board {
+  background: url(assets/backgammon/backgammon-board.png) center / 100% 100% no-repeat;
+  aspect-ratio: 2248 / 1520;
+  width: 100%;
+  padding: 8.4% 6.1% 8.4% 6.1%;
+  border: 0;
+  box-shadow: none;
+  grid-template-columns: 1fr 6.6% 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0;
+}
+
+.bg-board .bg-quadrant {
+  gap: 0;
+  min-height: 0;
+}
+
+.bg-board .bg-point {
+  height: 100%;
+  min-height: 0;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.bg-board .bg-point.top {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.bg-board .bg-point.bottom {
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bg-board .bg-checkers {
+  width: min(74%, var(--bg-checker-size, 28px));
+  max-height: 100%;
+  padding: 0;
+  margin-inline: auto;
+}
+
+.bg-board .bg-checker {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  margin-top: calc(var(--bg-overlap, -14px) / var(--bg-checker-size, 28px) * 100%);
+}
+
+.bg-board .bg-checkers .bg-checker:first-child {
+  margin-top: 0;
+}
+
+/* Top points: triangle base is at the outer (top) edge — stack grows toward center. */
+.bg-board .bg-point.top .bg-checkers {
+  justify-content: flex-start;
+  margin: 0;
+}
+
+/* Bottom points: triangle base is at the outer (bottom) edge — stack grows toward center. */
+.bg-board .bg-point.bottom .bg-checkers {
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.bg-board .bg-bar .bg-checkers {
+  width: min(32px, 90%);
+  align-self: center;
+}
+
+.bg-board .bg-bar-col {
+  background: transparent;
+  padding: 1.5% 0;
+}
+
+.bg-point-fill {
+  display: none;
+}
+
+.bg-checker.you {
+  background: url(assets/checkers/checkers-white.png) center/contain no-repeat;
+  background-size: 96%;
+  border: 0;
+  box-shadow: none;
+}
+
+.bg-checker.bot {
+  background: url(assets/checkers/checkers-green.png) center/contain no-repeat;
+  background-size: 96%;
+  border: 0;
+  box-shadow: none;
+}
+
+.bg-die {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.bg-die-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+.bg-board-dice.many .bg-die-img {
+  width: 26px;
+  height: 26px;
+}
+
+.bg-cube-die {
+  background: transparent;
+  border: 0;
+  width: 42px;
+  height: 46px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-cube-die .bg-cube-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.bg-point.selected {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+  z-index: 2;
+}
+
+.bg-point.destination {
+  outline: 3px solid var(--gold);
+  outline-offset: -2px;
+}
+
+.tile-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --table-action-width: 112px;
+    --table-hand-height: 78px;
+    --card-face-h: 72px;
+    --card-face-h-hand: min(72px, 18vw);
+    --card-face-h-discard: 120px;
+  }
+}
+
+@media (max-width: 520px) {
+  :root {
+    --table-action-width: 100px;
+    --table-hand-height: 68px;
+    --card-face-h: 66px;
+    --card-face-h-hand: min(66px, 20vw);
+    --card-face-h-trick: 60px;
+    --tichu-point-card-h: 32px;
+  }
+}
